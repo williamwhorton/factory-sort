@@ -23,7 +23,7 @@
 
 - [x] **Visual Theme**: "Mini Metro" inspired aesthetic with soft-edged, high-contrast geometric shapes and vibrant colors.
 - [x] **Animations**: Smooth, tactile movement for items being sorted and belt motion.
-- [ ] **Audio**: Pop/plink sounds for sorting actions.
+- [x] **Audio**: Pop/plink sounds for sorting actions.
 
 ### Phase 4: Web & Mobile Optimization
 
@@ -37,7 +37,7 @@
 
 - **Phase 1**: 100%
 - **Phase 2**: 100%
-- **Phase 3**: 66%
+- **Phase 3**: 100%
 - **Phase 4**: 0%
 
 ---
@@ -51,3 +51,4 @@
 - 2026-02-27: Implemented LevelManager, time-based level progression, and success/failure states.
 - 2026-02-27: Updated README with project details and tech stack.
 - 2026-02-27: Implemented "Toy Factory Minimalist" aesthetic: soft edges, high contrast colors, and tactile animations.
+- 2026-02-27: Implemented audio feedback for sorting actions and resolved file casing issues.

@@ -34,3 +34,10 @@
 - **Root cause**: Game scenes and main entry points were not covered by unit tests, and `jest.config.cjs` was not collecting coverage from all source files.
 - **Applied solution**: Updated `jest.config.cjs` to include all source files. Created comprehensive test suites for `Boot`, `Preloader`, `MainMenu`, `GameOver`, and `Game` scenes. Fixed TypeScript strict property initialization issues in `Game` scene.
 - **Verification steps**: Ran `pnpm test:coverage` and confirmed overall line coverage is 86.97%.
+
+## 2026-02-27: Fixed inconsistent file casing and imports
+
+- **Issue description**: Files like `Game.ts` and `Preloader.ts` were present alongside `game.ts` and `preloader.ts` in some contexts, causing TypeScript errors (TS1261) and import confusion.
+- **Root cause**: Inconsistent renaming during previous development steps.
+- **Applied solution**: Renamed all scene files to `snake_case` (e.g., `Game.ts` to `game.ts`) and updated all imports in `src/game/main.ts` and test files to reflect the correct casing.
+- **Verification steps**: Ran `pnpm test` and confirmed no casing-related TypeScript errors.

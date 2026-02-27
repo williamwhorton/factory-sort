@@ -46,6 +46,10 @@ describe('Game Scene', () => {
       restart: jest.fn(),
       start: jest.fn(),
     }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.sound = {
+      play: jest.fn(),
+    }
   })
 
   it('should be named Game', () => {
@@ -93,6 +97,21 @@ describe('Game Scene', () => {
     scene.handleSort(item as unknown as import('../src/game/objects/conveyor_item').ConveyorItem)
 
     expect(scene.tweens.add).toHaveBeenCalled()
+    expect(scene.sound.play).toHaveBeenCalledWith('sort_correct')
+  })
+
+  it('should play wrong sound if item color does not match any bin', () => {
+    scene.init({})
+    scene.create()
+    const item = {
+      itemColor: 0xffffff, // Some color that doesn't exist in bins
+      on: jest.fn(),
+    }
+
+    // @ts-expect-error - private method
+    scene.handleSort(item as unknown as import('../src/game/objects/conveyor_item').ConveyorItem)
+
+    expect(scene.sound.play).toHaveBeenCalledWith('sort_wrong')
   })
 
   it('should handle level completion', () => {
