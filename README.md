@@ -69,6 +69,18 @@ Run tests with coverage reporting:
 pnpm test:coverage
 ```
 
+Run end-to-end tests:
+
+```bash
+pnpm test:e2e
+```
+
+Open Cypress Test Runner:
+
+```bash
+pnpm cypress:open
+```
+
 ### Formatting and Linting
 
 Check code formatting:
@@ -99,7 +111,7 @@ pnpm lint:fix
 
 - `src/game/`: Core game logic, scenes, and objects.
 - `public/`: Assets such as images and audio.
-- `tests/`: Unit and integration tests using Jest.
+- `tests/`: Unit and E2E tests using Jest and Cypress.
 - `vite/`: Vite configuration for development and production.
 
 ## License

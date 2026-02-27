@@ -82,6 +82,21 @@ const Phaser = {
   Curves: {
     Path: MockPath,
   },
+  Geom: {
+    Rectangle: class {
+      x: number
+      y: number
+      width: number
+      height: number
+      static Contains = jest.fn()
+      constructor(x: number, y: number, width: number, height: number) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+      }
+    },
+  },
   Types: {
     Core: {
       GameConfig: class MockGameConfig {},

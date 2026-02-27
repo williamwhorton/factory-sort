@@ -31,7 +31,10 @@ export class ConveyorItem extends GameObjects.Container {
     // Make interactive
     const size = 30
     this.setSize(size, size)
-    this.setInteractive()
+    this.setInteractive(
+      new Phaser.Geom.Rectangle(-size / 2, -size / 2, size, size),
+      Phaser.Geom.Rectangle.Contains
+    )
     this.on('pointerdown', () => {
       this.emit('sort', this)
     })
