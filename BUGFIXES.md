@@ -41,9 +41,17 @@
 - **Root cause**: Inconsistent renaming during previous development steps where `Boot.ts` was retained but imported as `boot`.
 - **Applied solution**: Updated imports in `src/game/main.ts` and `tests/boot_scene.test.ts` to use the correct `Boot.ts` casing.
 - **Verification steps**: Ran `pnpm test` and confirmed no casing-related TypeScript errors.
-- -## 2026-02-27: Fixed item sorting interaction hit area
-- -- **Issue description**: Clicking on conveyor items often failed to trigger the sorting action.
-  -- **Root cause**: The `ConveyorItem` container was using a default top-left hit area (0, 0 to 30, 30), while the shapes were drawn centered at (0, 0). This made only the bottom-right quadrant of each item interactive.
-  -- **Applied solution**: Updated `ConveyorItem.ts` to use a centered hit area that matches the visual representation.
-  -- **Verification steps**: Updated `tests/__mocks__/phaser.ts` and ran `tests/conveyor_item.test.ts` to verify 100% code coverage and functional correctness.
-  -- **Note**: Audio feedback for sorting is still missing because the assets are not present and loading is currently disabled in `Preloader.ts`. This should be addressed in a future task when assets are available.
+
+## 2026-02-27: Fixed item sorting interaction hit area
+
+- **Issue description**: Clicking on conveyor items often failed to trigger the sorting action.
+- **Root cause**: The `ConveyorItem` container was using a default top-left hit area (0, 0 to 30, 30), while the shapes were drawn centered at (0, 0). This made only the bottom-right quadrant of each item interactive.
+- **Applied solution**: Updated `ConveyorItem.ts` to use a centered hit area that matches the visual representation.
+- **Verification steps**: Updated `tests/conveyor_item.test.ts` to explicitly check the hit area geometry and ran the tests.
+
+## 2026-02-27: Fixed crash due to missing audio assets
+
+- **Issue description**: The game would crash or throw errors when trying to play `sort_correct` or `sort_wrong` sounds because the assets were not present.
+- **Root cause**: Lack of existence checks before calling `this.sound.play()`.
+- **Applied solution**: Added `this.sound.get()` checks in `Game.ts` before playing sounds. Re-enabled audio loading in `Preloader.ts` for when assets are provided.
+- **Verification steps**: Updated `tests/game_scene.test.ts` and `tests/preloader_scene.test.ts` mocks and verified that all tests pass.
