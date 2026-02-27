@@ -143,7 +143,9 @@ export class Game extends Scene {
     const matchingBin = this.bins.find((bin) => bin.binColor === item.itemColor)
 
     if (matchingBin) {
-      this.sound.play('sort_correct')
+      if (this.sound.get('sort_correct')) {
+        this.sound.play('sort_correct')
+      }
       // Add a little juice: small scale up before moving
       this.tweens.add({
         targets: item,
@@ -176,7 +178,9 @@ export class Game extends Scene {
         },
       })
     } else {
-      this.sound.play('sort_wrong')
+      if (this.sound.get('sort_wrong')) {
+        this.sound.play('sort_wrong')
+      }
     }
   }
 
