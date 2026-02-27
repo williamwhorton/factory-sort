@@ -12,6 +12,8 @@ export class Boot extends Scene {
   }
 
   create(): void {
+    const { width, height } = this.scale
+    this.add.image(width / 2, height / 2, 'background')
     this.scene.start('Preloader')
   }
 }

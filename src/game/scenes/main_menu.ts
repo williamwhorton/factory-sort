@@ -6,12 +6,13 @@ export class MainMenu extends Scene {
   }
 
   create(): void {
-    this.add.image(512, 384, 'background')
+    const { width, height } = this.scale
+    this.add.image(width / 2, height / 2, 'background')
 
-    this.add.image(512, 300, 'logo')
+    this.add.image(width / 2, height * 0.4, 'logo')
 
     this.add
-      .text(512, 460, 'Main Menu', {
+      .text(width / 2, height * 0.6, 'Main Menu', {
         fontFamily: 'Arial Black',
         fontSize: 38,
         color: '#ffffff',

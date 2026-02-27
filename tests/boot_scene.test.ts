@@ -1,10 +1,13 @@
-import { Boot } from '../src/game/scenes/boot'
+import { Boot } from '../src/game/scenes/Boot'
 
 describe('Boot Scene', () => {
   let scene: Boot
 
   beforeEach(() => {
     scene = new Boot()
+    scene.add = {
+      image: jest.fn(),
+    } as unknown as Phaser.GameObjects.GameObjectFactory
     // @ts-expect-error - Mocking Phaser Scene properties
     scene.load = {
       image: jest.fn(),
@@ -13,6 +16,11 @@ describe('Boot Scene', () => {
     // @ts-expect-error - Mocking Phaser Scene properties
     scene.scene = {
       start: jest.fn(),
+    }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.scale = {
+      width: 1024,
+      height: 768,
     }
   })
 

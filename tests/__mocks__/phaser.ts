@@ -87,6 +87,10 @@ const Phaser = {
       GameConfig: class MockGameConfig {},
     },
   },
+  Scale: {
+    FIT: 0,
+    CENTER_BOTH: 1,
+  },
 }
 
 export default Phaser

@@ -6,13 +6,14 @@ export class GameOver extends Scene {
   }
 
   create(data: { score: number; win: boolean }): void {
+    const { width, height } = this.scale
     const bgColor = data.win ? 0x228b22 : 0xff0000
     this.cameras.main.setBackgroundColor(bgColor)
 
     const message = data.win ? 'Victory!' : 'Game Over'
 
     this.add
-      .text(512, 384, message, {
+      .text(width / 2, height * 0.4, message, {
         fontFamily: 'Arial Black',
         fontSize: 64,
         color: '#ffffff',
@@ -23,7 +24,7 @@ export class GameOver extends Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(512, 480, `Final Score: ${data.score || 0}`, {
+      .text(width / 2, height * 0.55, `Final Score: ${data.score || 0}`, {
         fontFamily: 'Arial Black',
         fontSize: 32,
         color: '#ffffff',
@@ -34,7 +35,7 @@ export class GameOver extends Scene {
       .setOrigin(0.5)
 
     this.add
-      .text(512, 600, 'Click to return to Main Menu', {
+      .text(width / 2, height * 0.75, 'Click to return to Main Menu', {
         fontFamily: 'Arial',
         fontSize: 24,
         color: '#ffffff',

@@ -35,20 +35,30 @@ export class Game extends Scene {
   }
 
   create(): void {
+    const { width, height } = this.scale
     this.cameras.main.setBackgroundColor(0xf0f0f0)
 
     // Center the belt
-    this.belt = new ConveyorBelt(this, 50, 300, 924, 60, this.currentLevel.beltSpeed)
+    const beltWidth = width * 0.9
+    this.belt = new ConveyorBelt(
+      this,
+      (width - beltWidth) / 2,
+      height * 0.4,
+      beltWidth,
+      60,
+      this.currentLevel.beltSpeed
+    )
 
     // Setup Bins
     const colors = [ItemColor.RED, ItemColor.BLUE, ItemColor.GREEN, ItemColor.YELLOW]
+    const binSpacing = width / (colors.length + 1)
     colors.forEach((color, index) => {
-      const bin = new DestinationBin(this, 200 + index * 200, 500, color)
+      const bin = new DestinationBin(this, binSpacing * (index + 1), height * 0.7, color)
       this.bins.push(bin)
     })
 
     this.scoreText = this.add
-      .text(512, 50, `Score: 0 / ${this.currentLevel.targetScore}`, {
+      .text(width / 2, 50, `Score: 0 / ${this.currentLevel.targetScore}`, {
         fontFamily: 'Arial Black',
         fontSize: 32,
         color: '#333333',
@@ -57,7 +67,7 @@ export class Game extends Scene {
       .setOrigin(0.5)
 
     this.timerText = this.add
-      .text(900, 50, `Time: ${this.timeLeft}`, {
+      .text(width - 50, 50, `Time: ${this.timeLeft}`, {
         fontFamily: 'Arial Black',
         fontSize: 24,
         color: '#333333',
@@ -65,7 +75,7 @@ export class Game extends Scene {
       .setOrigin(1, 0.5)
 
     this.levelText = this.add
-      .text(100, 50, `Level: ${this.levelManager.getLevelIndex()}`, {
+      .text(50, 50, `Level: ${this.levelManager.getLevelIndex()}`, {
         fontFamily: 'Arial Black',
         fontSize: 24,
         color: '#333333',
@@ -73,7 +83,7 @@ export class Game extends Scene {
       .setOrigin(0, 0.5)
 
     this.add
-      .text(512, 100, 'Tap an item to sort it!', {
+      .text(width / 2, 100, 'Tap an item to sort it!', {
         fontFamily: 'Arial',
         fontSize: 18,
         color: '#666666',
@@ -192,10 +202,11 @@ export class Game extends Scene {
   }
 
   private handleLevelComplete(): void {
+    const { width, height } = this.scale
     const message = this.levelManager.isLastLevel() ? 'Game Complete!' : 'Level Complete!'
 
     this.add
-      .text(512, 384, message, {
+      .text(width / 2, height / 2, message, {
         fontFamily: 'Arial Black',
         fontSize: 64,
         color: '#228B22',
@@ -214,8 +225,9 @@ export class Game extends Scene {
   }
 
   private handleLevelFailed(): void {
+    const { width, height } = this.scale
     this.add
-      .text(512, 384, 'Level Failed!', {
+      .text(width / 2, height / 2, 'Level Failed!', {
         fontFamily: 'Arial Black',
         fontSize: 64,
         color: '#ff0000',

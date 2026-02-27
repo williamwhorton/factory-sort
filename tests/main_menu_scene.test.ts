@@ -20,6 +20,11 @@ describe('MainMenu Scene', () => {
     scene.scene = {
       start: jest.fn(),
     }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.scale = {
+      width: 1024,
+      height: 768,
+    }
   })
 
   it('should be named MainMenu', () => {
@@ -29,7 +34,7 @@ describe('MainMenu Scene', () => {
   it('should create background, logo, and text', () => {
     scene.create()
     expect(scene.add.image).toHaveBeenCalledWith(512, 384, 'background')
-    expect(scene.add.image).toHaveBeenCalledWith(512, 300, 'logo')
+    expect(scene.add.image).toHaveBeenCalledWith(512, 768 * 0.4, 'logo')
     expect(scene.add.text).toHaveBeenCalled()
   })
 
