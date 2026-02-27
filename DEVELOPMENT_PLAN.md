@@ -4,13 +4,13 @@
 
 ---
 
-### Phase 1: Foundation & Core Mechanics [IN PROGRESS]
+### Phase 1: Foundation & Core Mechanics [COMPLETED]
 
 - [x] **TypeScript Migration**: Convert existing `.js` scenes in `src/game/scenes/` to `.ts` for strict type safety.
 - [x] **Conveyor System**: Modular belt paths for items to follow.
 - [x] **Item Spawning**: Generate colored geometric shapes (Red, Blue, Green, Yellow) that move along the belts.
-- [ ] **Sorting Interaction**: Single tap/click to move an item from the belt into a bin.
-- [ ] **Destination Bins**: Color-coded bins that receive and validate sorted items.
+- [x] **Sorting Interaction**: Single tap/click to move an item from the belt into a bin.
+- [x] **Destination Bins**: Color-coded bins that receive and validate sorted items.
 
 ### Phase 2: Progression & Level Design
 
@@ -34,7 +34,7 @@
 
 ### Progress Tracking
 
-- **Phase 1**: 60%
+- **Phase 1**: 100%
 - **Phase 2**: 0%
 - **Phase 3**: 0%
 - **Phase 4**: 0%
