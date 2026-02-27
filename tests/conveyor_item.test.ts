@@ -62,6 +62,12 @@ describe('ConveyorItem', () => {
     const item = new ConveyorItem(mockScene, 0, 0, ItemColor.RED, ItemShape.CUBE)
 
     expect(item.setInteractive).toHaveBeenCalled()
+    const call = (item.setInteractive as jest.Mock).mock.calls[0]
+    const geom = call[0]
+    expect(geom.x).toBe(-15)
+    expect(geom.y).toBe(-15)
+    expect(geom.width).toBe(30)
+    expect(geom.height).toBe(30)
     expect(item.on).toHaveBeenCalledWith('pointerdown', expect.any(Function))
 
     const emitSpy = jest.spyOn(item, 'emit')
