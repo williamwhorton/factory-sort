@@ -129,7 +129,7 @@ export class Game extends Scene {
 
     const item = new ConveyorItem(this, 0, 0, randomColor, randomShape)
 
-    item.on('sort', (item: ConveyorItem) => {
+    item.on('pointerdown', () => {
       if (this.gameStatus === LevelStatus.IN_PROGRESS) {
         this.handleSort(item)
       }
@@ -139,14 +139,28 @@ export class Game extends Scene {
   }
 
   private handleSort(item: ConveyorItem): void {
-    // Find matching bin
-    const matchingBin = this.bins.find((bin) => bin.binColor === item.itemColor)
+    // Calculate global position of the item
+    const itemWorldX = this.belt.x + item.x
+    const itemWorldY = this.belt.y + item.y
 
-    if (matchingBin) {
+    // Find the nearest bin
+    let nearestBin: DestinationBin | null = null
+    let minDistance = Infinity
+
+    this.bins.forEach((bin) => {
+      const distance = Phaser.Math.Distance.Between(itemWorldX, itemWorldY, bin.x, bin.y)
+      if (distance < minDistance) {
+        minDistance = distance
+        nearestBin = bin
+      }
+    })
+
+    if (nearestBin && (nearestBin as DestinationBin).binColor === item.itemColor) {
       if (this.sound.get('sort_correct')) {
         this.sound.play('sort_correct')
       }
       // Add a little juice: small scale up before moving
+      const targetBin = nearestBin as DestinationBin
       this.tweens.add({
         targets: item,
         scale: 1.2,
@@ -156,15 +170,16 @@ export class Game extends Scene {
           // Animate item to bin
           this.tweens.add({
             targets: item,
-            x: matchingBin.x - this.belt.x, // Adjust for container coordinate system
-            y: matchingBin.y - this.belt.y,
+            x: targetBin.x - this.belt.x, // Adjust for container coordinate system
+            y: targetBin.y - this.belt.y,
             scale: 0.2,
             alpha: 0,
             rotation: Math.PI,
             duration: 400,
             ease: 'Back.easeIn',
             onComplete: () => {
-              matchingBin.acceptItem(item)
+              targetBin.acceptItem(item)
+              this.currentScore++
               this.updateScore()
               item.destroy()
               // Remove from belt's internal list
@@ -181,12 +196,21 @@ export class Game extends Scene {
       if (this.sound.get('sort_wrong')) {
         this.sound.play('sort_wrong')
       }
+      // If mismatched, we still want some visual feedback and score decrement
+      this.currentScore = Math.max(0, this.currentScore - 1)
+      this.scoreText.setText(`Score: ${this.currentScore} / ${this.currentLevel.targetScore}`)
+
+      this.tweens.add({
+        targets: item,
+        x: item.x - 10,
+        duration: 50,
+        yoyo: true,
+        repeat: 2,
+      })
     }
   }
 
   private updateScore(): void {
-    const binScore = this.bins.reduce((sum, bin) => sum + bin.getScore(), 0)
-    this.currentScore = Math.max(this.currentScore, binScore)
     this.scoreText.setText(`Score: ${this.currentScore} / ${this.currentLevel.targetScore}`)
 
     if (this.currentScore >= this.currentLevel.targetScore) {

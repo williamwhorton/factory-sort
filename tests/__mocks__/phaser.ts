@@ -166,6 +166,19 @@ const Phaser = {
       }
     },
   },
+  Math: {
+    Distance: {
+      Between: jest.fn().mockReturnValue(0),
+    },
+    Vector2: class {
+      x: number
+      y: number
+      constructor(x: number, y: number) {
+        this.x = x
+        this.y = y
+      }
+    },
+  },
   Types: {
     Core: {
       GameConfig: class MockGameConfig {},
