@@ -58,4 +58,20 @@ describe('ConveyorItem', () => {
     expect(graphics.fillTriangle).toHaveBeenCalled()
     expect(graphics.strokeTriangle).toHaveBeenCalled()
   })
+
+  it('should be interactive and emit a sort event when clicked', () => {
+    const item = new ConveyorItem(mockScene, 0, 0, ItemColor.RED, ItemShape.CUBE)
+
+    expect(item.setInteractive).toHaveBeenCalled()
+    expect(item.on).toHaveBeenCalledWith('pointerdown', expect.any(Function))
+
+    const emitSpy = jest.spyOn(item, 'emit')
+    // To test the actual emission, we can find the callback passed to 'on'
+    const pointerDownCallback = (item.on as jest.Mock).mock.calls.find(
+      (call) => call[0] === 'pointerdown'
+    )[1]
+    pointerDownCallback()
+
+    expect(emitSpy).toHaveBeenCalledWith('sort', item)
+  })
 })

@@ -96,10 +96,14 @@
   - Use semantic versioning (e.g., `major.minor.patch`).
   - Bump version numbers according to changes.
   - Use `pnpm version` to manage versions.
+- **Trunk-Based Development**:
+  - Follow the trunk-based development strategy.
+  - Use short-lived feature branches when necessary, but aim to merge into `main` frequently.
+  - Commit code whenever a logical unit of work is completed (e.g., after a new test passes or a small refactoring).
 - **Branching**:
-  - Use feature branches for new features.
+  - Use feature branches for new features if they are complex; otherwise, work on `main`.
   - Use `main` for production-ready code.
-  - Use `develop` for development.
+  - Use `develop` for development (optional in trunk-based).
   - Use `hotfix` for hotfixes.
   - Use `release` for releases.
   - Use `renovate` for automatic dependency updates.

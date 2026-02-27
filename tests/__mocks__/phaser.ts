@@ -21,6 +21,10 @@ class MockContainer {
   scene: unknown
   list: unknown[] = []
   parentContainer: unknown = null
+  setSize = jest.fn().mockReturnThis()
+  setInteractive = jest.fn().mockReturnThis()
+  on = jest.fn().mockReturnThis()
+  emit = jest.fn().mockReturnThis()
   constructor(scene: unknown, x: number, y: number) {
     this.scene = scene
     this.x = x

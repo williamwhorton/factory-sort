@@ -28,6 +28,14 @@ export class ConveyorItem extends GameObjects.Container {
     this.drawShape()
     this.add(this.graphic)
 
+    // Make interactive
+    const size = 30
+    this.setSize(size, size)
+    this.setInteractive()
+    this.on('pointerdown', () => {
+      this.emit('sort', this)
+    })
+
     scene.add.existing(this)
   }
 
