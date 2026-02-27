@@ -31,19 +31,28 @@ export class ConveyorBelt extends GameObjects.Container {
   }
 
   private drawBelt(length: number): void {
+    const cornerRadius = 15
     this.beltGraphics.clear()
-    // Background of the belt
-    this.beltGraphics.fillStyle(0x333333, 1)
-    this.beltGraphics.fillRect(0, -this.beltWidth / 2, length, this.beltWidth)
 
-    // Border
-    this.beltGraphics.lineStyle(4, 0x1a1a1a, 1)
-    this.beltGraphics.strokeRect(0, -this.beltWidth / 2, length, this.beltWidth)
+    // Main belt track - softer dark grey
+    this.beltGraphics.fillStyle(0x343a40, 1)
+    this.beltGraphics.fillRoundedRect(0, -this.beltWidth / 2, length, this.beltWidth, cornerRadius)
 
-    // Simple belt marks
-    this.beltGraphics.lineStyle(2, 0x444444, 1)
-    for (let i = 0; i < length; i += 40) {
-      this.beltGraphics.lineBetween(i, -this.beltWidth / 2, i, this.beltWidth / 2)
+    // Border/Outline
+    this.beltGraphics.lineStyle(2, 0xadb5bd, 1)
+    this.beltGraphics.strokeRoundedRect(
+      0,
+      -this.beltWidth / 2,
+      length,
+      this.beltWidth,
+      cornerRadius
+    )
+
+    // Minimalist belt texture (dots instead of lines)
+    this.beltGraphics.fillStyle(0x495057, 1)
+    for (let i = 20; i < length; i += 40) {
+      this.beltGraphics.fillCircle(i, -this.beltWidth / 4, 3)
+      this.beltGraphics.fillCircle(i, this.beltWidth / 4, 3)
     }
   }
 

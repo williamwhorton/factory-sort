@@ -20,21 +20,38 @@ export class DestinationBin extends GameObjects.Container {
   }
 
   private drawBin(): void {
+    const cornerRadius = 10
     this.graphic.clear()
 
-    // Outer shell
-    this.graphic.lineStyle(4, 0x333333, 1)
-    this.graphic.strokeRect(-this.binWidth / 2, -this.binHeight / 2, this.binWidth, this.binHeight)
+    // Outer shell - rounded and softer
+    this.graphic.lineStyle(2, 0xadb5bd, 1)
+    this.graphic.strokeRoundedRect(
+      -this.binWidth / 2,
+      -this.binHeight / 2,
+      this.binWidth,
+      this.binHeight,
+      cornerRadius
+    )
+
+    // Interior background
+    this.graphic.fillStyle(0xf8f9fa, 1)
+    this.graphic.fillRoundedRect(
+      -this.binWidth / 2,
+      -this.binHeight / 2,
+      this.binWidth,
+      this.binHeight,
+      cornerRadius
+    )
 
     // Interior color indicator (bottom strip)
     this.graphic.fillStyle(this.binColor, 1)
-    this.graphic.fillRect(-this.binWidth / 2 + 5, this.binHeight / 2 - 15, this.binWidth - 10, 10)
-
-    // Side walls
-    this.graphic.fillStyle(0xcccccc, 1)
-    this.graphic.fillRect(-this.binWidth / 2, -this.binHeight / 2, 5, this.binHeight)
-    this.graphic.fillRect(this.binWidth / 2 - 5, -this.binHeight / 2, 5, this.binHeight)
-    this.graphic.fillRect(-this.binWidth / 2, this.binHeight / 2 - 5, this.binWidth, 5)
+    this.graphic.fillRoundedRect(
+      -this.binWidth / 2 + 10,
+      this.binHeight / 2 - 15,
+      this.binWidth - 20,
+      10,
+      4
+    )
   }
 
   public acceptItem(item: ConveyorItem): boolean {

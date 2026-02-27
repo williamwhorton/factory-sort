@@ -27,6 +27,12 @@ export class Preloader extends Scene {
     this.load.setPath('assets')
 
     this.load.image('logo', 'logo.png')
+
+    // Audio placeholders (assuming they might be added to assets folder)
+    // For now, we will use a synth or simple sound generation if possible,
+    // but typically we load files.
+    // this.load.audio('sort_correct', 'sort_correct.mp3');
+    // this.load.audio('sort_wrong', 'sort_wrong.mp3');
   }
 
   create(): void {

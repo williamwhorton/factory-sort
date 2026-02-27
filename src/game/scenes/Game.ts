@@ -133,25 +133,35 @@ export class Game extends Scene {
     const matchingBin = this.bins.find((bin) => bin.binColor === item.itemColor)
 
     if (matchingBin) {
-      // Animate item to bin
+      // Add a little juice: small scale up before moving
       this.tweens.add({
         targets: item,
-        x: matchingBin.x - this.belt.x, // Adjust for container coordinate system
-        y: matchingBin.y - this.belt.y,
-        scale: 0.5,
-        alpha: 0,
-        duration: 300,
-        ease: 'Power2',
+        scale: 1.2,
+        duration: 100,
+        yoyo: true,
         onComplete: () => {
-          matchingBin.acceptItem(item)
-          this.updateScore()
-          item.destroy()
-          // Remove from belt's internal list
-          const items = this.belt.getItems()
-          const index = items.indexOf(item)
-          if (index > -1) {
-            items.splice(index, 1)
-          }
+          // Animate item to bin
+          this.tweens.add({
+            targets: item,
+            x: matchingBin.x - this.belt.x, // Adjust for container coordinate system
+            y: matchingBin.y - this.belt.y,
+            scale: 0.2,
+            alpha: 0,
+            rotation: Math.PI,
+            duration: 400,
+            ease: 'Back.easeIn',
+            onComplete: () => {
+              matchingBin.acceptItem(item)
+              this.updateScore()
+              item.destroy()
+              // Remove from belt's internal list
+              const items = this.belt.getItems()
+              const index = items.indexOf(item)
+              if (index > -1) {
+                items.splice(index, 1)
+              }
+            },
+          })
         },
       })
     }
