@@ -5,17 +5,17 @@ import { DestinationBin } from '../objects/destination_bin'
 import { LevelManager, LevelStatus, LevelConfig } from '../level_manager'
 
 export class Game extends Scene {
-  private belt: ConveyorBelt
+  private belt!: ConveyorBelt
   private bins: DestinationBin[] = []
-  private scoreText: Phaser.GameObjects.Text
-  private timerText: Phaser.GameObjects.Text
-  private goalText: Phaser.GameObjects.Text
-  private levelText: Phaser.GameObjects.Text
+  private scoreText!: Phaser.GameObjects.Text
+  private timerText!: Phaser.GameObjects.Text
+  private goalText!: Phaser.GameObjects.Text
+  private levelText!: Phaser.GameObjects.Text
   private spawnTimer: number = 0
   private currentScore: number = 0
   private levelManager: LevelManager
-  private currentLevel: LevelConfig
-  private timeLeft: number
+  private currentLevel!: LevelConfig
+  private timeLeft!: number
   private gameStatus: LevelStatus = LevelStatus.IN_PROGRESS
 
   constructor() {
@@ -168,7 +168,8 @@ export class Game extends Scene {
   }
 
   private updateScore(): void {
-    this.currentScore = this.bins.reduce((sum, bin) => sum + bin.getScore(), 0)
+    const binScore = this.bins.reduce((sum, bin) => sum + bin.getScore(), 0)
+    this.currentScore = Math.max(this.currentScore, binScore)
     this.scoreText.setText(`Score: ${this.currentScore} / ${this.currentLevel.targetScore}`)
 
     if (this.currentScore >= this.currentLevel.targetScore) {

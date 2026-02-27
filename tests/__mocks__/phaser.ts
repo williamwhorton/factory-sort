@@ -4,6 +4,8 @@ class MockGraphics {
   lineStyle = jest.fn().mockReturnThis()
   fillRect = jest.fn().mockReturnThis()
   strokeRect = jest.fn().mockReturnThis()
+  fillRoundedRect = jest.fn().mockReturnThis()
+  strokeRoundedRect = jest.fn().mockReturnThis()
   fillCircle = jest.fn().mockReturnThis()
   strokeCircle = jest.fn().mockReturnThis()
   fillTriangle = jest.fn().mockReturnThis()
@@ -70,9 +72,20 @@ const Phaser = {
     Container: MockContainer,
     Graphics: MockGraphics,
   },
-  Scene: class MockScene {},
+  Scene: class MockScene {
+    sys: { settings: { key: string } }
+    constructor(config: string | { key: string }) {
+      const key = typeof config === 'string' ? config : config.key
+      this.sys = { settings: { key } }
+    }
+  },
   Curves: {
     Path: MockPath,
+  },
+  Types: {
+    Core: {
+      GameConfig: class MockGameConfig {},
+    },
   },
 }
 

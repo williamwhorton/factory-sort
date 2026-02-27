@@ -8,6 +8,9 @@ const mockGraphics = {
   lineStyle: jest.fn().mockReturnThis(),
   fillRect: jest.fn().mockReturnThis(),
   strokeRect: jest.fn().mockReturnThis(),
+  fillRoundedRect: jest.fn().mockReturnThis(),
+  strokeRoundedRect: jest.fn().mockReturnThis(),
+  fillCircle: jest.fn().mockReturnThis(),
   lineBetween: jest.fn().mockReturnThis(),
 }
 

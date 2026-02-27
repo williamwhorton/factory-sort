@@ -20,3 +20,17 @@
 - **Root cause**: Omission during Phase 2 implementation.
 - **Applied solution**: Added comprehensive JSDoc to the `LevelManager` class and its methods. Created `tests/level_manager.test.ts` to ensure full coverage and functional correctness.
 - **Verification steps**: Ran `pnpm test:coverage` and confirmed 100% line coverage for the `LevelManager` class.
+
+## 2026-02-27: Fixed failing tests due to visual refinements
+
+- **Issue description**: Visual updates to game objects (using `fillRoundedRect`, etc.) caused unit tests to fail with `TypeError`.
+- **Root cause**: Mocked Phaser Graphics in tests did not include the new methods used in the implementation.
+- **Applied solution**: Updated Phaser mocks in `tests/__mocks__/phaser.ts` and individual test files to include `fillRoundedRect`, `strokeRoundedRect`, and other missing methods.
+- **Verification steps**: Ran `pnpm test` and confirmed all 40 tests pass.
+
+## 2026-02-27: Met 80% code coverage requirement
+
+- **Issue description**: Project code coverage was below the 80% threshold required by the guidelines.
+- **Root cause**: Game scenes and main entry points were not covered by unit tests, and `jest.config.cjs` was not collecting coverage from all source files.
+- **Applied solution**: Updated `jest.config.cjs` to include all source files. Created comprehensive test suites for `Boot`, `Preloader`, `MainMenu`, `GameOver`, and `Game` scenes. Fixed TypeScript strict property initialization issues in `Game` scene.
+- **Verification steps**: Ran `pnpm test:coverage` and confirmed overall line coverage is 86.97%.

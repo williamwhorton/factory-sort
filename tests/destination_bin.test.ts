@@ -10,6 +10,8 @@ const mockScene = {
       lineStyle: jest.fn().mockReturnThis(),
       fillRect: jest.fn().mockReturnThis(),
       strokeRect: jest.fn().mockReturnThis(),
+      fillRoundedRect: jest.fn().mockReturnThis(),
+      strokeRoundedRect: jest.fn().mockReturnThis(),
       fillCircle: jest.fn().mockReturnThis(),
       strokeCircle: jest.fn().mockReturnThis(),
     }),

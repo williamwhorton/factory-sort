@@ -4,6 +4,7 @@ module.exports = {
   setupFiles: ['jest-canvas-mock', '<rootDir>/tests/setup.ts'],
   testMatch: ['**/tests/**/*.test.ts'],
   collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{ts,js}'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
