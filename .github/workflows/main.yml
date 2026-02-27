@@ -14,16 +14,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        run: npm install -g pnpm@latest-10
+      
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run ESLint
-        run: npm run lint:fix
+        run: pnpm run lint:fix
 
       - name: Run Prettier
-        run: npm run format:fix
+        run: pnpm run format:fix
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -35,17 +38,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+          cache: 'pnpm'
 
+      - name: Install pnpm
+        run: npm install -g pnpm@latest-10
+        
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run unit tests
-        run: npm test -- --coverage --watchAll=false
+        run: pnpm run test:coverage
 
       - name: Check coverage threshold
         run: |
-          COVERAGE=$(npm test -- --coverage --watchAll=false 2>&1 | grep -oP 'Lines\s*:\s*\K[0-9.]+' | head -1)
+          COVERAGE=$(pnpm run test:coverage 2>&1 | grep -oP 'Lines\s*:\s*\K[0-9.]+' | head -1)
           echo "Code coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
             echo "Coverage is below 80% threshold"
