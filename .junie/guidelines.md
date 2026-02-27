@@ -101,7 +101,13 @@
   - Use short-lived feature branches when necessary, but aim to merge into `main` frequently.
   - Commit code whenever a logical unit of work is completed (e.g., after a new test passes or a small refactoring).
 - **Branching**:
-  - Use feature branches for new features if they are complex; otherwise, work on `main`.
+  - Use feature branches for new features or significant changes; work directly on `main` for small bug fixes or very minor updates.
+  - When work is complete, push to repository and create a pull request.
+  - Merge into `main` after approval.
+  - Delete feature branches after merging.
+- **Branch Naming**:
+  - Use `feature/` for new features.
+  - Use `bugfix/` for bug fixes.
   - Use `main` for production-ready code.
   - Use `develop` for development (optional in trunk-based).
   - Use `hotfix` for hotfixes.

@@ -1,10 +1,10 @@
 import { GameObjects, Scene } from 'phaser'
 
 export enum ItemColor {
-  RED = 0xff4d4d,
-  BLUE = 0x4d79ff,
-  GREEN = 0x4dff88,
-  YELLOW = 0xffff4d,
+  RED = 0xff6b6b,
+  BLUE = 0x4dabf7,
+  GREEN = 0x51cf66,
+  YELLOW = 0xffd43b,
 }
 
 export enum ItemShape {
@@ -41,22 +41,21 @@ export class ConveyorItem extends GameObjects.Container {
 
   private drawShape(): void {
     const size = 30
+    const cornerRadius = 6
     this.graphic.clear()
     this.graphic.fillStyle(this.itemColor, 1)
-    this.graphic.lineStyle(2, 0xffffff, 1)
 
     switch (this.itemShape) {
       case ItemShape.CUBE:
-        this.graphic.fillRect(-size / 2, -size / 2, size, size)
-        this.graphic.strokeRect(-size / 2, -size / 2, size, size)
+        this.graphic.fillRoundedRect(-size / 2, -size / 2, size, size, cornerRadius)
         break
       case ItemShape.SPHERE:
         this.graphic.fillCircle(0, 0, size / 2)
-        this.graphic.strokeCircle(0, 0, size / 2)
         break
       case ItemShape.PYRAMID:
+        // Softened triangle using a custom shape or just fillTriangle for now
+        // To keep it simple and minimalist, let's use fillTriangle but maybe slightly smaller to feel "softer"
         this.graphic.fillTriangle(0, -size / 2, -size / 2, size / 2, size / 2, size / 2)
-        this.graphic.strokeTriangle(0, -size / 2, -size / 2, size / 2, size / 2, size / 2)
         break
     }
   }

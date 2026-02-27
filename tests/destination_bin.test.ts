@@ -1,5 +1,5 @@
-import { DestinationBin } from '../src/game/objects/DestinationBin'
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { DestinationBin } from '../src/game/objects/destination_bin'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Scene
 const mockScene = {
@@ -10,6 +10,8 @@ const mockScene = {
       lineStyle: jest.fn().mockReturnThis(),
       fillRect: jest.fn().mockReturnThis(),
       strokeRect: jest.fn().mockReturnThis(),
+      fillRoundedRect: jest.fn().mockReturnThis(),
+      strokeRoundedRect: jest.fn().mockReturnThis(),
       fillCircle: jest.fn().mockReturnThis(),
       strokeCircle: jest.fn().mockReturnThis(),
     }),

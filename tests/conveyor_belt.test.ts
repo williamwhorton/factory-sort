@@ -1,5 +1,5 @@
-import { ConveyorBelt } from '../src/game/objects/ConveyorBelt'
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { ConveyorBelt } from '../src/game/objects/conveyor_belt'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Graphics
 const mockGraphics = {
@@ -8,6 +8,9 @@ const mockGraphics = {
   lineStyle: jest.fn().mockReturnThis(),
   fillRect: jest.fn().mockReturnThis(),
   strokeRect: jest.fn().mockReturnThis(),
+  fillRoundedRect: jest.fn().mockReturnThis(),
+  strokeRoundedRect: jest.fn().mockReturnThis(),
+  fillCircle: jest.fn().mockReturnThis(),
   lineBetween: jest.fn().mockReturnThis(),
 }
 

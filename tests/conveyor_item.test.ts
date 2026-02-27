@@ -1,4 +1,4 @@
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Scene
 const mockScene = {
@@ -9,6 +9,8 @@ const mockScene = {
       lineStyle: jest.fn().mockReturnThis(),
       fillRect: jest.fn().mockReturnThis(),
       strokeRect: jest.fn().mockReturnThis(),
+      fillRoundedRect: jest.fn().mockReturnThis(),
+      strokeRoundedRect: jest.fn().mockReturnThis(),
       fillCircle: jest.fn().mockReturnThis(),
       strokeCircle: jest.fn().mockReturnThis(),
       fillTriangle: jest.fn().mockReturnThis(),
@@ -35,8 +37,7 @@ describe('ConveyorItem', () => {
 
     new ConveyorItem(mockScene, 0, 0, ItemColor.BLUE, ItemShape.CUBE)
 
-    expect(graphics.fillRect).toHaveBeenCalled()
-    expect(graphics.strokeRect).toHaveBeenCalled()
+    expect(graphics.fillRoundedRect).toHaveBeenCalled()
   })
 
   it('should draw a sphere when ItemShape.SPHERE is specified', () => {
@@ -46,7 +47,6 @@ describe('ConveyorItem', () => {
     new ConveyorItem(mockScene, 0, 0, ItemColor.GREEN, ItemShape.SPHERE)
 
     expect(graphics.fillCircle).toHaveBeenCalled()
-    expect(graphics.strokeCircle).toHaveBeenCalled()
   })
 
   it('should draw a pyramid when ItemShape.PYRAMID is specified', () => {
@@ -56,7 +56,6 @@ describe('ConveyorItem', () => {
     new ConveyorItem(mockScene, 0, 0, ItemColor.YELLOW, ItemShape.PYRAMID)
 
     expect(graphics.fillTriangle).toHaveBeenCalled()
-    expect(graphics.strokeTriangle).toHaveBeenCalled()
   })
 
   it('should be interactive and emit a sort event when clicked', () => {
