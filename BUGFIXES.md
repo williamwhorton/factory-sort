@@ -37,7 +37,7 @@
 
 ## 2026-02-27: Fixed inconsistent file casing and imports
 
-- **Issue description**: Files like `Game.ts` and `Preloader.ts` were present alongside `game.ts` and `preloader.ts` in some contexts, causing TypeScript errors (TS1261) and import confusion.
-- **Root cause**: Inconsistent renaming during previous development steps.
-- **Applied solution**: Renamed all scene files to `snake_case` (e.g., `Game.ts` to `game.ts`) and updated all imports in `src/game/main.ts` and test files to reflect the correct casing.
+- **Issue description**: Files like `Boot.ts` were causing TypeScript errors (TS1261) due to inconsistent import casing in `src/game/main.ts` and test files.
+- **Root cause**: Inconsistent renaming during previous development steps where `Boot.ts` was retained but imported as `boot`.
+- **Applied solution**: Updated imports in `src/game/main.ts` and `tests/boot_scene.test.ts` to use the correct `Boot.ts` casing.
 - **Verification steps**: Ran `pnpm test` and confirmed no casing-related TypeScript errors.

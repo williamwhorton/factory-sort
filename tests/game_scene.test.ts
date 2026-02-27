@@ -50,6 +50,11 @@ describe('Game Scene', () => {
     scene.sound = {
       play: jest.fn(),
     }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.scale = {
+      width: 1024,
+      height: 768,
+    }
   })
 
   it('should be named Game', () => {

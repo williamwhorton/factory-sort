@@ -23,6 +23,11 @@ describe('GameOver Scene', () => {
     scene.scene = {
       start: jest.fn(),
     }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.scale = {
+      width: 1024,
+      height: 768,
+    }
   })
 
   it('should be named GameOver', () => {
@@ -32,14 +37,19 @@ describe('GameOver Scene', () => {
   it('should show Victory message on win', () => {
     scene.create({ score: 100, win: true })
     expect(scene.cameras.main.setBackgroundColor).toHaveBeenCalledWith(0x228b22)
-    expect(scene.add.text).toHaveBeenCalledWith(512, 384, 'Victory!', expect.any(Object))
-    expect(scene.add.text).toHaveBeenCalledWith(512, 480, 'Final Score: 100', expect.any(Object))
+    expect(scene.add.text).toHaveBeenCalledWith(512, 768 * 0.4, 'Victory!', expect.any(Object))
+    expect(scene.add.text).toHaveBeenCalledWith(
+      512,
+      768 * 0.55,
+      'Final Score: 100',
+      expect.any(Object)
+    )
   })
 
   it('should show Game Over message on loss', () => {
     scene.create({ score: 50, win: false })
     expect(scene.cameras.main.setBackgroundColor).toHaveBeenCalledWith(0xff0000)
-    expect(scene.add.text).toHaveBeenCalledWith(512, 384, 'Game Over', expect.any(Object))
+    expect(scene.add.text).toHaveBeenCalledWith(512, 768 * 0.4, 'Game Over', expect.any(Object))
   })
 
   it('should return to MainMenu on click', () => {

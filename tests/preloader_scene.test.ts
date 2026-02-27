@@ -23,6 +23,11 @@ describe('Preloader Scene', () => {
     scene.scene = {
       start: jest.fn(),
     }
+    // @ts-expect-error - Mocking Phaser Scene properties
+    scene.scale = {
+      width: 1024,
+      height: 768,
+    }
   })
 
   it('should be named Preloader', () => {

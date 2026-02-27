@@ -1,5 +1,5 @@
 import { AUTO, Game } from 'phaser'
-import { Boot } from './scenes/boot'
+import { Boot } from './scenes/Boot'
 import { Game as MainGame } from './scenes/game'
 import { GameOver } from './scenes/game_over'
 import { MainMenu } from './scenes/main_menu'
