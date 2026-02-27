@@ -30,6 +30,9 @@ importers:
       cypress:
         specifier: ^15.11.0
         version: 15.11.0
+      cypress-wait-until:
+        specifier: ^3.0.2
+        version: 3.0.2
       eslint:
         specifier: ^10.0.2
         version: 10.0.2
@@ -1375,6 +1378,9 @@ packages:
   cssstyle@4.6.0:
     resolution: {integrity: sha512-2z+rWdzbbSZv6/rhtvzvqeZQHrBaqgogqt85sqFNbabZOuFbCVFb8kPeEtZjiKkbrm395irpNKiYeFeLiQnFPg==}
     engines: {node: '>=18'}
+
+  cypress-wait-until@3.0.2:
+    resolution: {integrity: sha512-iemies796dD5CgjG5kV0MnpEmKSH+s7O83ZoJLVzuVbZmm4lheMsZqAVT73hlMx4QlkwhxbyUzhOBUOZwoOe0w==}
 
   cypress@15.11.0:
     resolution: {integrity: sha512-NXDE6/fqZuzh1Zr53nyhCCa4lcANNTYWQNP9fJO+tzD3qVTDaTUni5xXMuigYjMujQ7CRiT9RkJJONmPQSsDFw==}
@@ -4457,6 +4463,8 @@ snapshots:
     dependencies:
       '@asamuzakjp/css-color': 3.2.0
       rrweb-cssom: 0.8.0
+
+  cypress-wait-until@3.0.2: {}
 
   cypress@15.11.0:
     dependencies:

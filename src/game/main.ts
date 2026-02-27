@@ -21,7 +21,11 @@ const config: Phaser.Types.Core.GameConfig = {
 }
 
 const StartGame = (parent: string) => {
-  return new Game({ ...config, parent })
+  const game = new Game({ ...config, parent })
+  if (typeof window !== 'undefined') {
+    ;(window as { game?: Game }).game = game
+  }
+  return game
 }
 
 export default StartGame
