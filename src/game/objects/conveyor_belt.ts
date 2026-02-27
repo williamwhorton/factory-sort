@@ -1,17 +1,25 @@
 import { GameObjects, Scene } from 'phaser'
-import { ConveyorItem } from './ConveyorItem'
+import { ConveyorItem } from './conveyor_item'
 
 export class ConveyorBelt extends GameObjects.Container {
   private items: ConveyorItem[] = []
   private beltGraphics: GameObjects.Graphics
   private path: Phaser.Curves.Path
   private beltWidth: number
-  private beltSpeed: number = 2 // Pixels per frame (will be moved to level config)
+  private beltSpeed: number = 2
 
-  constructor(scene: Scene, x: number, y: number, length: number, width: number = 60) {
+  constructor(
+    scene: Scene,
+    x: number,
+    y: number,
+    length: number,
+    width: number = 60,
+    speed: number = 2
+  ) {
     super(scene, x, y)
 
     this.beltWidth = width
+    this.beltSpeed = speed
     this.path = new Phaser.Curves.Path(0, 0)
     this.path.lineTo(length, 0)
 

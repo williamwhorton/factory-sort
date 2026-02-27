@@ -1,5 +1,5 @@
 import { GameObjects, Scene } from 'phaser'
-import { ConveyorItem, ItemColor } from './ConveyorItem'
+import { ConveyorItem, ItemColor } from './conveyor_item'
 
 export class DestinationBin extends GameObjects.Container {
   public binColor: ItemColor

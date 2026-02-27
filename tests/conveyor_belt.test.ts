@@ -1,5 +1,5 @@
-import { ConveyorBelt } from '../src/game/objects/ConveyorBelt'
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { ConveyorBelt } from '../src/game/objects/conveyor_belt'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Graphics
 const mockGraphics = {

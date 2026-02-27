@@ -1,4 +1,4 @@
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Scene
 const mockScene = {

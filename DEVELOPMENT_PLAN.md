@@ -12,11 +12,11 @@
 - [x] **Sorting Interaction**: Single tap/click to move an item from the belt into a bin.
 - [x] **Destination Bins**: Color-coded bins that receive and validate sorted items.
 
-### Phase 2: Progression & Level Design
+### Phase 2: Progression & Level Design [COMPLETED]
 
-- [ ] **Time-Based Levels**: Implement a timer for each level. Players must sort a target number of items within the time limit.
-- [ ] **Level Manager**: Handles increasing conveyor speed and adding multiple belts across levels.
-- [ ] **Success/Failure States**: Transitions for level completion or failing to meet the goal/running out of time.
+- [x] **Time-Based Levels**: Implement a timer for each level. Players must sort a target number of items within the time limit.
+- [x] **Level Manager**: Handles increasing conveyor speed and adding multiple belts across levels.
+- [x] **Success/Failure States**: Transitions for level completion or failing to meet the goal/running out of time.
 
 ### Phase 3: "Toy Factory Minimalist" Art & Polish
 
@@ -35,7 +35,7 @@
 ### Progress Tracking
 
 - **Phase 1**: 100%
-- **Phase 2**: 0%
+- **Phase 2**: 100%
 - **Phase 3**: 0%
 - **Phase 4**: 0%
 
@@ -47,3 +47,4 @@
 - 2026-02-27: Implemented modular conveyor belt system and item spawning logic.
 - 2026-02-27: Configured ESLint, Prettier, and Husky for automated pre-commit quality checks.
 - 2026-02-27: Set up Jest testing environment and achieved 100% unit test coverage for core game objects.
+- 2026-02-27: Implemented LevelManager, time-based level progression, and success/failure states.

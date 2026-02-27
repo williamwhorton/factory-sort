@@ -1,5 +1,5 @@
-import { DestinationBin } from '../src/game/objects/DestinationBin'
-import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/ConveyorItem'
+import { DestinationBin } from '../src/game/objects/destination_bin'
+import { ConveyorItem, ItemColor, ItemShape } from '../src/game/objects/conveyor_item'
 
 // Mock Phaser Scene
 const mockScene = {
