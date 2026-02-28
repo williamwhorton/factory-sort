@@ -30,7 +30,7 @@ export class LevelManager {
       timeLimit: 30,
       beltSpeed: 2,
       spawnInterval: 1500,
-      allowedColors: [0xff4d4d, 0x4d79ff, 0x4dff88, 0xffff4d],
+      allowedColors: [0xff6b6b, 0x4dabf7, 0x51cf66, 0xffd43b],
     },
     {
       id: 2,
@@ -38,7 +38,7 @@ export class LevelManager {
       timeLimit: 45,
       beltSpeed: 2.5,
       spawnInterval: 1200,
-      allowedColors: [0xff4d4d, 0x4d79ff, 0x4dff88, 0xffff4d],
+      allowedColors: [0xff6b6b, 0x4dabf7, 0x51cf66, 0xffd43b],
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export class LevelManager {
       timeLimit: 60,
       beltSpeed: 3,
       spawnInterval: 1000,
-      allowedColors: [0xff4d4d, 0x4d79ff, 0x4dff88, 0xffff4d],
+      allowedColors: [0xff6b6b, 0x4dabf7, 0x51cf66, 0xffd43b],
     },
   ]
 

@@ -49,6 +49,7 @@ describe('Game Scene', () => {
     // @ts-expect-error - Mocking Phaser Scene properties
     scene.sound = {
       play: jest.fn(),
+      get: jest.fn().mockReturnValue({}),
     }
     // @ts-expect-error - Mocking Phaser Scene properties
     scene.scale = {

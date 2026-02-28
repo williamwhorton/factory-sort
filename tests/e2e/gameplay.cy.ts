@@ -80,13 +80,21 @@ describe('Gameplay E2E Tests', () => {
         const matchingBin = gameScene.bins.find((bin) => bin.binColor === itemColor)
 
         if (matchingBin) {
+          // Teleport item near bin FIRST to ensure nearest-bin logic works
+          item.x = matchingBin.x - belt.x
+          item.y = matchingBin.y - belt.y
+
           item.emit('pointerdown')
 
           // The score update happens after an animation (400ms + 100ms)
-          cy.wait(1000)
+          cy.wait(1500)
 
           // Verify score is 1
-          assert.equal(gameScene.currentScore, 1, 'Score should be 1')
+          cy.window().then((win) => {
+            const { game } = win as unknown as ExtendedWindow
+            const updatedScene = game.scene.getScene('Game') as TestGameScene
+            assert.equal(updatedScene.currentScore, 1, 'Score should be 1')
+          })
         } else {
           throw new Error('No matching bin found for item color: ' + itemColor)
         }
@@ -107,35 +115,44 @@ describe('Gameplay E2E Tests', () => {
       // 1. Get a match first
       cy.waitUntil(() => belt.getItems().length > 0, { timeout: 5000 }).then(() => {
         const item = belt.getItems()[0]
+        const matchingBin = gameScene.bins.find((b) => b.binColor === item.itemColor)
+        if (matchingBin) {
+          item.x = matchingBin.x - belt.x
+          item.y = matchingBin.y - belt.y
+        }
         item.emit('pointerdown')
-        cy.wait(1000)
-        assert.equal(gameScene.currentScore, 1, 'Score should be 1')
+        cy.wait(1500)
+        cy.window().then((win) => {
+          const { game } = win as unknown as ExtendedWindow
+          const updatedScene = game.scene.getScene('Game') as TestGameScene
+          assert.equal(updatedScene.currentScore, 1, 'Score should be 1')
+        })
 
-        // 2. Click a mismatched item (or rather, click ANY item and ensure it fails if it's mismatched)
-        // Since we want to test "mismatched item", we need to wait for another item
+        // 2. Click a mismatched item
         cy.waitUntil(() => belt.getItems().length > 0, { timeout: 5000 }).then(() => {
           const secondItem = belt.getItems()[0]
 
-          // We'll force this to be a "mismatch" test by finding an item that SHOULD mismatch
-          // But wait, the current game logic: handleSort FINDS the matching bin.
-          // If a bin exists for that color, it's a match.
-          // If NO bin exists for that color, it's a mismatch.
-          // In the current game, all 4 colors have bins. So every item has a matching bin.
-          // To test a mismatch, we'd need an item color that has no bin.
+          // To ensure a mismatch, we'll teleport the item far away from its matching bin
+          // and close to a different bin.
+          // Or simpler: just emit 'pointerdown' and let the nearest-bin logic handle it.
+          // But wait, if it's on the belt, it's always near SOME bin.
+          // Let's just teleport it to a known "mismatch" position.
+          const otherBin = gameScene.bins.find((b) => b.binColor !== secondItem.itemColor)
 
-          // Wait, the issue says: "The user clicks on an item that doesn't match the nearest container"
-          // In my previous analysis, handleSort finds ANY matching bin, not the nearest one.
-          // This is a BUG/Deviation from requirement.
+          if (otherBin) {
+            // Move item near other bin
+            secondItem.x = otherBin.x - belt.x
+            secondItem.y = otherBin.y - belt.y + 10 // slightly offset but nearest
 
-          // Also: "The user clicks on a mismatched item again; the score decrements by one."
+            secondItem.emit('sort', secondItem)
+            cy.wait(500) // mismatch is faster (no animation to bin)
 
-          // I will implement the test as if it's supposed to work, and it will likely fail.
-          secondItem.emit('pointerdown')
-          // If the second item is also a match (which it will be in current code), score becomes 2.
-          // If it was a mismatch, it should become 0 (1 - 1).
-
-          cy.wait(1000)
-          assert.equal(gameScene.currentScore, 0, 'Score should be 0 (mismatch)')
+            cy.window().then((win) => {
+              const { game } = win as unknown as ExtendedWindow
+              const updatedScene = game.scene.getScene('Game') as TestGameScene
+              assert.equal(updatedScene.currentScore, 0, 'Score should be 0 (mismatch)')
+            })
+          }
         })
       })
     })

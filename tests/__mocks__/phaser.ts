@@ -74,9 +74,78 @@ const Phaser = {
   },
   Scene: class MockScene {
     sys: { settings: { key: string } }
+    load: {
+      setPath: jest.Mock
+      image: jest.Mock
+      audio: jest.Mock
+      on: jest.Mock
+    }
+    sound: {
+      play: jest.Mock
+      get: jest.Mock
+    }
+    add: {
+      image: jest.Mock
+      rectangle: jest.Mock
+      text: jest.Mock
+      existing: jest.Mock
+      graphics: jest.Mock
+    }
+    time: {
+      addEvent: jest.Mock
+      delayedCall: jest.Mock
+    }
+    tweens: {
+      add: jest.Mock
+    }
+    scale: {
+      width: number
+      height: number
+    }
+    cameras: {
+      main: {
+        setBackgroundColor: jest.Mock
+      }
+    }
     constructor(config: string | { key: string }) {
       const key = typeof config === 'string' ? config : config.key
       this.sys = { settings: { key } }
+      this.load = {
+        setPath: jest.fn().mockReturnThis(),
+        image: jest.fn().mockReturnThis(),
+        audio: jest.fn().mockReturnThis(),
+        on: jest.fn().mockReturnThis(),
+      }
+      this.sound = {
+        play: jest.fn(),
+        get: jest.fn(),
+      }
+      this.add = {
+        image: jest.fn().mockReturnValue({ setOrigin: jest.fn().mockReturnThis() }),
+        rectangle: jest.fn().mockReturnValue({ setStrokeStyle: jest.fn().mockReturnThis() }),
+        text: jest.fn().mockReturnValue({
+          setOrigin: jest.fn().mockReturnThis(),
+          setText: jest.fn().mockReturnThis(),
+        }),
+        existing: jest.fn(),
+        graphics: jest.fn().mockReturnValue(new MockGraphics()),
+      }
+      this.time = {
+        addEvent: jest.fn(),
+        delayedCall: jest.fn(),
+      }
+      this.tweens = {
+        add: jest.fn(),
+      }
+      this.scale = {
+        width: 800,
+        height: 600,
+      }
+      this.cameras = {
+        main: {
+          setBackgroundColor: jest.fn(),
+        },
+      }
     }
   },
   Curves: {
@@ -94,6 +163,19 @@ const Phaser = {
         this.y = y
         this.width = width
         this.height = height
+      }
+    },
+  },
+  Math: {
+    Distance: {
+      Between: jest.fn().mockReturnValue(0),
+    },
+    Vector2: class {
+      x: number
+      y: number
+      constructor(x: number, y: number) {
+        this.x = x
+        this.y = y
       }
     },
   },

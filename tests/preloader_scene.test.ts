@@ -18,6 +18,7 @@ describe('Preloader Scene', () => {
       on: jest.fn(),
       setPath: jest.fn(),
       image: jest.fn(),
+      audio: jest.fn(),
     }
     // @ts-expect-error - Mocking Phaser Scene properties
     scene.scene = {
